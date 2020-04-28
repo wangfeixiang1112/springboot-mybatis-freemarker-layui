@@ -1,0 +1,30 @@
+server:
+  port: 8888
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/springboot-mybatis?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  freemarker:
+    allow-request-override: false
+    #本机调试时，配置项template_update_delay=0，这样就关闭了模板缓存。注意线上环境要开启缓存
+    cache: false
+    settings:
+      template_update_delay: 0
+      auto_import: common/common.ftl as com
+      datetime_format: yyyy-MM-dd
+      classic_compatible: true #兼容传统模式
+    check-template-location: true
+    charset: UTF-8
+    content-type: text/html
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+    prefix:
+    #若在freemarker获取request对象，在spring boot 在application.properties可以这么配置
+    request-context-attribute: request
+    suffix: .ftl
+    template-loader-path: classpath:/templates/ #template-loader-path表示所有的模板文件都放在该目录下
+  mvc:
+    static-path-pattern: /static/** #表示访问该路径时代表请求静态资源，用户可以直接访问该请求路径中的静态资源
